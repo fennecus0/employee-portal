@@ -1,0 +1,103 @@
+{% extends 'main-empty.html.twig' %}
+
+{% block page_header %}Historie{% endblock page_header %}
+
+{% block page_center %}
+                {% if posts == null %}
+                    <p>Noch keine Daten</p>
+                {% else %}
+
+                    {% for post in posts %}
+                        <div class="page row">
+                            <div class="col-sm-2 card-left">
+                                <div class="card-time-top">{{ post.initialDate }} <br> <span>{{ post.initialTime }}</span></div>
+
+                                {% if post.endingDate != null %}
+                                    <div class="card-time-bottom">{{ post.endingDate }} <br> <span>{{ post.endingTime }}</span></div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-sm-10 card-right">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="card-title">
+                                            {{ post.title }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 content">
+                                        <div class="block">
+                                            <h4>{{ post.firstName }} {{ post.lastName }}</h4>
+                                        </div>
+
+                                        {% if post.firstName1 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName1 }}<br> {{ post.lastName1 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName2 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName2 }}<br> {{ post.lastName2 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName3 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName3 }}<br> {{ post.lastName3 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName4 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName4 }}<br> {{ post.lastName4 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName5 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName5 }}<br> {{ post.lastName5 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName6 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName6 }}<br> {{ post.lastName6 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName7 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName7 }}<br> {{ post.lastName7 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName8 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName8 }}<br> {{ post.lastName8 }}</h4>
+                                            </div>
+                                        {% endif %}
+                                        {% if post.firstName9 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName9 }}<br> {{ post.lastName9 }}</h4>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if post.firstName10 != null %}
+                                            <div class="block">
+                                                <h4>{{ post.firstName10 }}<br> {{ post.lastName10 }}</h4>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(posts) }}
+    </div>
+{% endblock %}

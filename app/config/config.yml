@@ -4,16 +4,16 @@ imports:
     - { resource: services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: de
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
-        resource: '%kernel.project_dir%/app/config/routing.yml'
+        resource: '%kernel.root_dir%/config/routing.yml'
         strict_requirements: ~
     form: ~
     csrf_protection: ~
@@ -23,10 +23,11 @@ framework:
         engines: ['twig']
     default_locale: '%locale%'
     trusted_hosts: ~
+    trusted_proxies: ~
     session:
-        # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id: session.handler.native_file
-        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments: ~
     http_method_override: true
     assets: ~
@@ -50,7 +51,7 @@ doctrine:
         charset: UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
-        #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'
+        #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #path: '%database_path%'
@@ -62,8 +63,41 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    host: '%mailer_host%'
-    username: '%mailer_user%'
-    password: '%mailer_password%'
-    spool: { type: memory }
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    auth_mode: login
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+    spool: { type:memory }
+
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    use_username_form_type: false
+    registration:
+            form:
+                type: AppBundle\Form\RegistrationType
+
+
+#KNP Paginator
+knp_paginator:
+    page_range:                 5          # default page range used in pagination control
+    default_options:
+        page_name:              page       # page query parameter name
+        sort_field_name:        sort       # sort field query parameter name
+        sort_direction_name:    direction  # sort direction query parameter name
+        distinct:               true       # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: Pagination/view/twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig                         # sort link template
+
+#EasyAdmin
+easy_admin:
+    entities:
+        - AppBundle\Entity\User
+        - AppBundle\Entity\DForm

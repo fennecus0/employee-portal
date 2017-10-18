@@ -1,0 +1,10 @@
+{% extends 'sidebar-right.html.twig' %}
+
+
+{% block page_right %}
+
+    {% for post in posts | sort('id') |reverse%}
+        <a href="#" class="list-group-item list-group-item-action">{{ post.title }} <span class="badge">{{ post.initialDate }}</span></a>
+    {% endfor %}
+
+{% endblock %}

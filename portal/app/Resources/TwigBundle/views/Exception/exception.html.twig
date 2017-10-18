@@ -1,0 +1,21 @@
+{% block body %}
+    <div class="page-content">
+        <div class="error-block">
+            <div class="logo">
+                <a href="{{ asset('/') }}">
+                    <img src="{{ asset('images/logo.png') }}" alt="Friedrich PICARD Mitarbeiterportal">
+                </a>
+                <p>Friedrich PICARD Mitarbeiterportal</p>
+            </div>
+
+
+            <h1>404</h1>
+
+            <p>Die Seite wurde nicht gefunden.</p>
+
+            <p>Die von Ihnen gesuchte Seite existiert leider nicht oder der Link ist veraltet.</p>
+
+            <p><a href="{{ asset('/') }}">Zur Startseite</a></p>
+        </div>
+    </div>
+{% endblock %}
